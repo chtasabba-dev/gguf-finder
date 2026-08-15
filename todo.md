@@ -38,3 +38,10 @@
 - [x] Replace the profile repository list with square-style cards on desktop.
 - [x] Keep cards responsive as a single-column stack on small screens.
 - [x] Verify the card grid and redeploy GitHub Pages.
+
+## Privacy Policy and ads readiness
+
+- [ ] Review the app's actual data flows and document only what it does today.
+- [ ] Add an Arabic Privacy Policy page with placeholders for owner/contact/date.
+- [ ] Link the policy from the footer and verify its route.
+- [ ] Redeploy GitHub Pages and confirm the policy URL.

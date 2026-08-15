@@ -88,7 +88,7 @@ export default function Home() {
 
         {state === "success" && view === "repository" && repository && <section className="dark-results"><div className="dark-result-head"><div><p className="dark-eyebrow">المستودع</p><h2>{repository.metadata.id.split("/").slice(1).join("/")}</h2><p>{files.length} ملف GGUF{detectParameterSize(repository.metadata.id) ? ` · ${detectParameterSize(repository.metadata.id)} بارامتر` : ""}</p><p className="dark-recommendation">اقتراح للـPC ديالك (RAM تقريباً {pcProfile.ramGb}GB): {recommendForPc(detectParameterSize(repository.metadata.id), pcProfile.ramGb)}</p></div><a href={buildRepoUrl(repository.repoId)} target="_blank" rel="noreferrer" className="dark-repo-link">فتح المستودع <ExternalLink size={14} /></a></div>{files.length === 0 ? <div className="dark-message"><FileCode2 size={28} /><p>ما كاين حتى ملف GGUF فهاد المستودع.</p></div> : <div className="dark-file-list">{files.map((file) => <article className="dark-file" key={file.path}><div className="dark-file-meta"><strong>{file.quantization}</strong><span title={file.name}>{file.name}</span><small>{file.parameterSize ? `${file.parameterSize} بارامتر · ` : ""}{formatBytes(file.size)}</small></div><a className="dark-download" href={file.downloadUrl} download={file.name} target="_blank" rel="noreferrer"><ArrowDownToLine size={16} /> تحميل</a></article>)}</div>}</section>}
       </main>
-      <footer className="dark-footer">GGUF Finder · خدام بلا API key للمستودعات العامة</footer>
+      <footer className="dark-footer">GGUF Finder · خدام بلا API key للمستودعات العامة · <a href={`${import.meta.env.BASE_URL}?page=privacy`}>سياسة الخصوصية</a></footer>
     </div>
   );
 }
