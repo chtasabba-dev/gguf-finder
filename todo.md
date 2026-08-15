@@ -100,3 +100,9 @@
 - [x] Replace profile model cards with a larger, easier-to-scan list.
 - [x] Keep the View Files action permanently visible on each model row.
 - [x] Verify the list view and redeploy GitHub Pages.
+
+## Compact profile rows
+
+- [ ] Reduce profile-result row height and horizontal visual weight.
+- [ ] Keep model details and View Files action readable in a compact row.
+- [ ] Verify the compact list and redeploy GitHub Pages.

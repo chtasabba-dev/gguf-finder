@@ -61,3 +61,18 @@ button, input { font:inherit; } button, a { -webkit-tap-highlight-color:transpar
 .dark-profile-card > .dark-open-button { display:inline-flex; width:164px; min-height:46px; align-items:center; justify-content:center; gap:8px; border:1px solid #b8ef64; background:#b8ef64; color:#101510; font-size:12px; font-weight:800; box-shadow:0 5px 14px rgba(184,239,100,.14); }
 .dark-profile-card > .dark-open-button:hover { background:#d2ff89; border-color:#d2ff89; }
 @media (max-width:700px) { .dark-profile-list { padding:15px; gap:11px; }.dark-profile-card { grid-template-columns:1fr; gap:15px; min-height:0; padding:16px; }.dark-profile-card > .dark-open-button { width:100%; } }
+
+/* Compact profile rows: list density takes priority over card presence. */
+.dark-profile-list { width:100%; max-width:920px; margin:0 auto; padding:12px 0; gap:7px; }
+.dark-profile-card { grid-template-columns:minmax(0,1fr) 126px; gap:14px; min-height:82px; padding:11px 14px; border-radius:7px; background:#171d19; box-shadow:none; }
+.dark-profile-card:hover { transform:none; background:#1b231e; }
+.dark-profile-card--good { box-shadow:inset -3px 0 0 var(--status-good); }
+.dark-profile-card--medium { box-shadow:inset -3px 0 0 var(--status-medium); }
+.dark-profile-card--bad { box-shadow:inset -3px 0 0 var(--status-bad); }
+.dark-profile-card .dark-card-index { display:none; }
+.dark-profile-card .dark-card-badges { gap:5px; margin:0 0 5px; }
+.dark-profile-card h3 { margin:0; font-size:14px; line-height:1.3; }
+.dark-profile-card p { margin:4px 0 0; font-size:10px; }
+.dark-profile-card .dark-card-recommendation { display:none; }
+.dark-profile-card > .dark-open-button { width:126px; min-height:36px; padding:0 9px; border-radius:6px; font-size:11px; box-shadow:none; }
+@media (max-width:700px) { .dark-profile-list { padding:10px 0; }.dark-profile-card { grid-template-columns:minmax(0,1fr) 112px; gap:10px; min-height:76px; padding:10px; }.dark-profile-card > .dark-open-button { width:112px; min-height:34px; font-size:10px; }.dark-profile-card h3 { font-size:12px; }.dark-profile-card .dark-card-badges { margin-bottom:4px; } }
