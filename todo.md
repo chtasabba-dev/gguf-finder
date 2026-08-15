@@ -91,6 +91,6 @@
 
 ## Clear status colors and card comfort
 
-- [ ] Apply clear green, yellow, and red suitability colors across the site.
-- [ ] Improve model-card spacing, contrast, and scanning comfort.
-- [ ] Verify the refined visual system and redeploy GitHub Pages.
+- [x] Apply clear green, yellow, and red suitability colors across the site.
+- [x] Improve model-card spacing, contrast, and scanning comfort.
+- [x] Verify the refined visual system and redeploy GitHub Pages.
