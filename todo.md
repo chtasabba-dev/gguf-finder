@@ -45,3 +45,9 @@
 - [x] Add an Arabic Privacy Policy page with placeholders for owner/contact/date.
 - [x] Link the policy from the footer and verify its route.
 - [x] Redeploy GitHub Pages and confirm the policy URL.
+
+## Three-color PC recommendation
+
+- [x] Define suitable, conditional, and unsuitable model thresholds.
+- [x] Show the PC recommendation in green, yellow, or red with a readable label.
+- [ ] Verify the visual states and redeploy GitHub Pages.
