@@ -54,7 +54,7 @@
 
 ## Languages and return navigation
 
-- [ ] Add AR, FR, and EN interface language controls.
-- [ ] Apply RTL only for Arabic and preserve the dark visual system in all languages.
-- [ ] Add a return button from repository files to the prior profile results.
-- [ ] Verify language switching and return navigation, then redeploy GitHub Pages.
+- [x] Add AR, FR, and EN interface language controls.
+- [x] Apply RTL only for Arabic and preserve the dark visual system in all languages.
+- [x] Add a return button from repository files to the prior profile results.
+- [x] Verify language switching and return navigation, then redeploy GitHub Pages.
