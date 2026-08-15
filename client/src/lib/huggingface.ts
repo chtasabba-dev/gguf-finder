@@ -33,6 +33,16 @@ export type RepositoryResult = {
   repoId: string;
 };
 
+export type ProfileRepository = {
+  id: string;
+  author?: string;
+  downloads?: number;
+  likes?: number;
+  lastModified?: string;
+  tags?: string[];
+  pipeline_tag?: string;
+};
+
 export class HuggingFaceError extends Error {
   status: number;
   kind: "not-found" | "auth" | "rate-limit" | "network" | "unexpected";
@@ -93,10 +103,27 @@ async function requestJson<T>(url: string, options: FetchOptions = {}): Promise<
   throw new HuggingFaceError("Hugging Face is temporarily unavailable. Please try again later.", response.status);
 }
 
+function normalizeHuggingFacePath(value: string) {
+  return value.trim().replace(/^https?:\/\/huggingface\.co\//i, "").replace(/^@/, "").replace(/\/$/, "");
+}
+
 export function validateRepoId(value: string): string | null {
-  const normalized = value.trim().replace(/^https?:\/\/huggingface\.co\//i, "").replace(/\/$/, "");
+  const normalized = normalizeHuggingFacePath(value);
   if (!/^[^/\s]+\/[^/\s]+$/.test(normalized)) return null;
   return normalized;
+}
+
+export function validateOwner(value: string): string | null {
+  const normalized = normalizeHuggingFacePath(value);
+  if (!/^[^/\s]+$/.test(normalized)) return null;
+  return normalized;
+}
+
+export async function findProfileRepositories(owner: string, options: FetchOptions = {}): Promise<ProfileRepository[]> {
+  const normalizedOwner = validateOwner(owner);
+  if (!normalizedOwner) throw new HuggingFaceError("اسم الـprofile ما صالحش. استعمل owner فقط أو رابط profile ديال Hugging Face.", 400, "not-found");
+  const url = `${API_ORIGIN}/models?author=${encodeURIComponent(normalizedOwner)}&filter=gguf&limit=50&full=false&sort=downloads&direction=-1`;
+  return requestJson<ProfileRepository[]>(url, options);
 }
 
 export async function findRepository(repoId: string, options: FetchOptions = {}): Promise<RepositoryResult> {

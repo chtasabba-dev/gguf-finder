@@ -25,3 +25,10 @@
 - [x] Inspect the latest workflow run and repository Pages status.
 - [x] Resolve any remaining workflow or Pages permission issue.
 - [x] Verify the deployed URL or give the exact final manual step.
+
+## Flexible Hugging Face input
+
+- [ ] Accept repository URLs, `owner/repository`, and owner/profile names.
+- [ ] For a profile name, list repositories and identify those with GGUF files.
+- [ ] Keep the UI simple: show repositories first, then GGUF files after selection.
+- [ ] Verify both input modes and redeploy GitHub Pages.
