@@ -32,3 +32,9 @@
 - [x] For a profile name, list repositories and identify those with GGUF files.
 - [x] Keep the UI simple: show repositories first, then GGUF files after selection.
 - [x] Verify both input modes and redeploy GitHub Pages.
+
+## Profile card grid
+
+- [ ] Replace the profile repository list with square-style cards on desktop.
+- [ ] Keep cards responsive as a single-column stack on small screens.
+- [ ] Verify the card grid and redeploy GitHub Pages.
