@@ -76,3 +76,13 @@ button, input { font:inherit; } button, a { -webkit-tap-highlight-color:transpar
 .dark-profile-card .dark-card-recommendation { display:none; }
 .dark-profile-card > .dark-open-button { width:126px; min-height:36px; padding:0 9px; border-radius:6px; font-size:11px; box-shadow:none; }
 @media (max-width:700px) { .dark-profile-list { padding:10px 0; }.dark-profile-card { grid-template-columns:minmax(0,1fr) 112px; gap:10px; min-height:76px; padding:10px; }.dark-profile-card > .dark-open-button { width:112px; min-height:34px; font-size:10px; }.dark-profile-card h3 { font-size:12px; }.dark-profile-card .dark-card-badges { margin-bottom:4px; } }
+
+/* Plain profile list: deliberately no cards, panels, shadows, or rounded row surfaces. */
+.dark-profile-list { max-width:920px; padding:0; gap:0; border-top:1px solid var(--line); }
+.dark-profile-card { grid-template-columns:minmax(0,1fr) 118px; gap:14px; min-height:0; padding:12px 0; border:0; border-bottom:1px solid var(--line); border-radius:0; background:transparent; box-shadow:none; }
+.dark-profile-card:hover { background:transparent; box-shadow:none; }
+.dark-profile-card--good, .dark-profile-card--medium, .dark-profile-card--bad { border-color:transparent; box-shadow:none; }
+.dark-profile-card .dark-card-badges { margin:0 0 5px; }
+.dark-profile-card h3 { font-size:13px; }
+.dark-profile-card > .dark-open-button { width:118px; min-height:34px; border-radius:4px; box-shadow:none; }
+@media (max-width:700px) { .dark-profile-list { border-top:1px solid var(--line); }.dark-profile-card { grid-template-columns:minmax(0,1fr) 108px; padding:10px 0; border-radius:0; }.dark-profile-card > .dark-open-button { width:108px; min-height:33px; } }

@@ -106,3 +106,9 @@
 - [x] Reduce profile-result row height and horizontal visual weight.
 - [x] Keep model details and View Files action readable in a compact row.
 - [x] Verify the compact list and redeploy GitHub Pages.
+
+## Plain profile list
+
+- [ ] Remove the remaining card background, shadow, and rounded treatment from profile results.
+- [ ] Present every profile model as a simple separated list row with a View Files action.
+- [ ] Verify the plain list and redeploy GitHub Pages.
