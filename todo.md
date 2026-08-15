@@ -97,6 +97,6 @@
 
 ## Clear profile list view
 
-- [ ] Replace profile model cards with a larger, easier-to-scan list.
-- [ ] Keep the View Files action permanently visible on each model row.
-- [ ] Verify the list view and redeploy GitHub Pages.
+- [x] Replace profile model cards with a larger, easier-to-scan list.
+- [x] Keep the View Files action permanently visible on each model row.
+- [x] Verify the list view and redeploy GitHub Pages.
