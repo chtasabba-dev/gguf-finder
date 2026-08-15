@@ -88,3 +88,9 @@
 - [x] Show a green, yellow, or red PC suitability badge directly on every profile model card.
 - [x] Remove the redundant manual model-type selector from profile results.
 - [x] Verify the updated cards and redeploy GitHub Pages.
+
+## Clear status colors and card comfort
+
+- [ ] Apply clear green, yellow, and red suitability colors across the site.
+- [ ] Improve model-card spacing, contrast, and scanning comfort.
+- [ ] Verify the refined visual system and redeploy GitHub Pages.
