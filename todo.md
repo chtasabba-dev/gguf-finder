@@ -50,4 +50,4 @@
 
 - [x] Define suitable, conditional, and unsuitable model thresholds.
 - [x] Show the PC recommendation in green, yellow, or red with a readable label.
-- [ ] Verify the visual states and redeploy GitHub Pages.
+- [x] Verify the visual states and redeploy GitHub Pages.
