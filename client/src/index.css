@@ -86,3 +86,19 @@ button, input { font:inherit; } button, a { -webkit-tap-highlight-color:transpar
 .dark-profile-card h3 { font-size:13px; }
 .dark-profile-card > .dark-open-button { width:118px; min-height:34px; border-radius:4px; box-shadow:none; }
 @media (max-width:700px) { .dark-profile-list { border-top:1px solid var(--line); }.dark-profile-card { grid-template-columns:minmax(0,1fr) 108px; padding:10px 0; border-radius:0; }.dark-profile-card > .dark-open-button { width:108px; min-height:33px; } }
+
+/* Semantic profile list: model results are rows, not cards. */
+.dark-profile-list { display:block; width:100%; max-width:920px; margin:0 auto; padding:0; list-style:none; border-top:1px solid var(--line); }
+.dark-profile-row { display:grid; grid-template-columns:minmax(0,1fr) 118px; align-items:center; gap:14px; min-height:0; padding:12px 0; border-bottom:1px solid var(--line); background:transparent; }
+.dark-profile-row-info { min-width:0; }
+.dark-profile-row .dark-card-badges { margin:0 0 5px; }
+.dark-profile-row h3 { max-width:100%; margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text); font-size:13px; line-height:1.3; }
+.dark-profile-row p { margin:4px 0 0; color:var(--muted); font-size:10px; }
+.dark-profile-view-button { width:118px; min-height:34px; border-radius:4px; box-shadow:none; }
+.dark-filter-good { border-color:var(--status-good) !important; color:#caffc7 !important; }
+.dark-filter-medium { border-color:var(--status-medium) !important; color:#fffbd0 !important; }
+.dark-filter-bad { border-color:var(--status-bad) !important; color:#ffd0d0 !important; }
+.dark-filter-good.is-active { background:var(--status-good) !important; color:#061a07 !important; }
+.dark-filter-medium.is-active { background:var(--status-medium) !important; color:#1c1c00 !important; }
+.dark-filter-bad.is-active { background:var(--status-bad) !important; color:#fff !important; }
+@media (max-width:700px) { .dark-profile-row { grid-template-columns:minmax(0,1fr) 108px; gap:10px; padding:10px 0; }.dark-profile-row h3 { font-size:12px; }.dark-profile-view-button { width:108px; min-height:33px; font-size:10px; } }

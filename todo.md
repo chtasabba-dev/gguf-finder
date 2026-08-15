@@ -112,3 +112,10 @@
 - [x] Remove the remaining card background, shadow, and rounded treatment from profile results.
 - [x] Present every profile model as a simple separated list row with a View Files action.
 - [x] Verify the plain list and redeploy GitHub Pages.
+
+## Semantic list and complete color filters
+
+- [ ] Replace profile-result container and entries with semantic list markup.
+- [ ] Add an explicit red suitability filter alongside green, yellow, and all.
+- [ ] Style the recommendation filters with their corresponding status colors.
+- [ ] Verify list filtering and redeploy GitHub Pages.

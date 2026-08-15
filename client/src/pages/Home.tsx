@@ -14,7 +14,7 @@ const DEFAULT_REPO = "bartowski/Qwen2.5-Coder-7B-Instruct-GGUF";
 const FAVORITES_KEY = "gguf-finder:favorites";
 type State = "idle" | "loading" | "success" | "error";
 type View = "profile" | "repository";
-type FilterMode = "all" | "good" | "medium";
+type FilterMode = "all" | "good" | "medium" | "bad";
 type SortMode = "size-desc" | "size-asc" | "parameters" | "quantization";
 type Favorite = GgufFile & { repoId: string };
 
@@ -59,6 +59,7 @@ export default function Home() {
   const t = copy[language];
   const extra = extraCopy[language];
   const taskLabels = modelTaskLabels[language];
+  const filterLabels: Record<FilterMode, string> = { all: t.all, good: t.suitable, medium: t.conditional, bad: language === "ar" ? "ثقيل" : language === "fr" ? "Lourd" : "Heavy" };
   const suitability = repository ? getPcSuitability(detectParameterSize(repository.metadata.id), manualPcProfile.ramGb, language) : null;
   const repositoryTask = repository ? detectModelTask(repository.metadata.pipeline_tag, repository.metadata.tags, repository.metadata.id, Object.keys(repository.metadata.cardData ?? {})) : "other";
 
@@ -117,7 +118,42 @@ export default function Home() {
       {state === "loading" && <div className="dark-message"><Loader2 size={28} className="spin" /><p>{t.loading}</p></div>}
       {state === "error" && <div className="dark-message dark-error"><X size={28} /><p>{error}</p><button onClick={() => void search()}>{t.retry}</button></div>}
 
-      {state === "success" && view === "profile" && <section className="dark-results"><div className="dark-result-head"><div><p className="dark-eyebrow">{t.profile}</p><h2>{owner}</h2><p>{t.profileCount(profileRepos.length)}</p></div><a href={`https://huggingface.co/${encodeURIComponent(owner)}`} target="_blank" rel="noreferrer" className="dark-repo-link">{t.openProfile} <ExternalLink size={14} /></a></div><div className="dark-controls"><div className="dark-filter-group"><span>{t.filters}</span>{(["all", "good", "medium"] as FilterMode[]).map((item) => <button type="button" key={item} className={filterMode === item ? "is-active" : ""} onClick={() => setFilterMode(item)}>{item === "all" ? t.all : item === "good" ? t.suitable : t.conditional}</button>)}</div></div>{visibleProfileRepos.length === 0 ? <div className="dark-message"><FolderSearch size={28} /><p>{filterMode === "all" ? t.noProfile : t.noFilterFiles}</p></div> : <div className="dark-profile-list">{visibleProfileRepos.map((repo, index) => { const genre = detectModelTask(repo.pipeline_tag, repo.tags, repo.id); const cardSuitability = getPcSuitability(detectParameterSize(repo.id), manualPcProfile.ramGb, language); return <article className={`dark-profile-card dark-profile-card--${cardSuitability.status}`} key={repo.id}><div><span className="dark-card-index">{String(index + 1).padStart(2, "0")}</span><div className="dark-card-badges"><span className="dark-genre-badge">{taskLabels[genre]}</span><span className={`dark-card-suitability dark-card-suitability--${cardSuitability.status}`}>{cardSuitability.label}</span></div><h3>{repo.id.split("/").slice(1).join("/")}</h3><p>{repo.downloads ? `${formatDownloads(repo.downloads)} ${t.downloads}` : ""}{repo.likes ? ` · ${formatDownloads(repo.likes)} ${t.likes}` : ""}</p><small className="dark-card-recommendation">{cardSuitability.message}</small></div><button className="dark-open-button" onClick={() => void loadRepository(repo.id, true)}>{t.viewFiles} <ArrowDownToLine size={15} /></button></article>; })}</div>}</section>}
+      {state === "success" && view === "profile" && (
+        <section className="dark-results">
+          <div className="dark-result-head">
+            <div><p className="dark-eyebrow">{t.profile}</p><h2>{owner}</h2><p>{t.profileCount(profileRepos.length)}</p></div>
+            <a href={`https://huggingface.co/${encodeURIComponent(owner)}`} target="_blank" rel="noreferrer" className="dark-repo-link">{t.openProfile} <ExternalLink size={14} /></a>
+          </div>
+          <div className="dark-controls">
+            <div className="dark-filter-group">
+              <span>{t.filters}</span>
+              {(["all", "good", "medium", "bad"] as FilterMode[]).map((item) => (
+                <button type="button" key={item} className={`${filterMode === item ? "is-active " : ""}dark-filter-${item}`} onClick={() => setFilterMode(item)}>{filterLabels[item]}</button>
+              ))}
+            </div>
+          </div>
+          {visibleProfileRepos.length === 0 ? (
+            <div className="dark-message"><FolderSearch size={28} /><p>{filterMode === "all" ? t.noProfile : t.noFilterFiles}</p></div>
+          ) : (
+            <ul className="dark-profile-list" aria-label={`${owner} GGUF models`}>
+              {visibleProfileRepos.map((repo) => {
+                const genre = detectModelTask(repo.pipeline_tag, repo.tags, repo.id);
+                const rowSuitability = getPcSuitability(detectParameterSize(repo.id), manualPcProfile.ramGb, language);
+                return (
+                  <li className="dark-profile-row" key={repo.id}>
+                    <div className="dark-profile-row-info">
+                      <div className="dark-card-badges"><span className="dark-genre-badge">{taskLabels[genre]}</span><span className={`dark-card-suitability dark-card-suitability--${rowSuitability.status}`}>{rowSuitability.label}</span></div>
+                      <h3>{repo.id.split("/").slice(1).join("/")}</h3>
+                      <p>{repo.downloads ? `${formatDownloads(repo.downloads)} ${t.downloads}` : ""}{repo.likes ? ` · ${formatDownloads(repo.likes)} ${t.likes}` : ""}</p>
+                    </div>
+                    <button className="dark-open-button dark-profile-view-button" onClick={() => void loadRepository(repo.id, true)}>{t.viewFiles} <ArrowDownToLine size={15} /></button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+      )}
 
       {state === "success" && view === "repository" && repository && <section className="dark-results"><div className="dark-result-head"><div>{canReturnToProfile && <button className="dark-back-results" type="button" onClick={backToProfile}><ArrowRight size={15} /> {t.back}</button>}<p className="dark-eyebrow">{t.repository}</p><h2>{repository.metadata.id.split("/").slice(1).join("/")}</h2><p>{t.files(files.length)}{detectParameterSize(repository.metadata.id) ? ` · ${detectParameterSize(repository.metadata.id)} ${t.parameters}` : ""}</p>{suitability && <div className={`dark-recommendation dark-recommendation--${suitability.status}`}><span>{suitability.label}</span><p>{t.pc} (RAM ≈ {manualPcProfile.ramGb}GB): {suitability.message}</p></div>}</div><div className="dark-result-actions"><button type="button" className="dark-repo-link dark-action-button" onClick={() => void shareCurrent()}><Share2 size={14} /> {shareCopied ? extra.linkCopied : extra.share}</button><a href={buildRepoUrl(repository.repoId)} target="_blank" rel="noreferrer" className="dark-repo-link">{t.openRepo} <ExternalLink size={14} /></a></div></div><div className="dark-controls"><div className="dark-filter-group"><span>{t.filters}</span>{(["all", "good", "medium"] as FilterMode[]).map((item) => <button type="button" key={item} className={filterMode === item ? "is-active" : ""} onClick={() => setFilterMode(item)}>{item === "all" ? t.all : item === "good" ? t.suitable : t.conditional}</button>)}</div><label className="dark-sort"><span>{extra.task}</span><select value={taskFilter} onChange={(event) => setTaskFilter(event.target.value as ModelTask)}>{(Object.keys(taskLabels) as ModelTask[]).map((item) => <option value={item} key={item}>{taskLabels[item]}</option>)}</select></label><label className="dark-sort"><span>{t.sort}</span><select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}><option value="size-desc">{t.sizeLarge}</option><option value="size-asc">{t.sizeSmall}</option><option value="parameters">{t.params}</option><option value="quantization">{t.quantization}</option></select></label></div>{files.length === 0 ? <div className="dark-message"><FileCode2 size={28} /><p>{t.noFiles}</p></div> : visibleFiles.length === 0 ? <div className="dark-message"><FolderSearch size={28} /><p>{t.noFilterFiles}</p></div> : <div className="dark-file-list">{visibleFiles.map((file) => { const saved = isFavorite(file); const command = `huggingface-cli download ${repository.repoId} ${file.path} --local-dir .`; return <article className="dark-file" key={file.path}><div className="dark-file-meta"><strong>{file.quantization}</strong><span title={file.name}>{file.name}</span><small>{file.parameterSize ? `${file.parameterSize} ${t.parameters} · ` : ""}{formatBytes(file.size)}</small></div><div className="dark-file-actions"><button type="button" className={comparePaths.includes(file.path) ? "is-selected" : ""} title={extra.compare} onClick={() => toggleCompare(file.path)}><GitCompareArrows size={16} /></button><button type="button" title={saved ? t.removeFavorite : t.addFavorite} className={saved ? "is-saved" : ""} onClick={() => toggleFavorite(file)}><Heart size={16} fill={saved ? "currentColor" : "none"} /></button><button type="button" title={t.copyLink} onClick={() => void copyText(file.downloadUrl)}><Copy size={16} /></button><button type="button" title={t.copyCommand} onClick={() => void copyText(command)}><Terminal size={16} /></button><a className="dark-download" href={file.downloadUrl} download={file.name} target="_blank" rel="noreferrer"><ArrowDownToLine size={16} /> {t.download}</a>{copied === file.downloadUrl || copied === command ? <small className="dark-copied">{t.copied}</small> : null}</div></article>; })}</div>}{comparePaths.length === 2 && <div className="dark-comparison"><div className="dark-comparison-head"><strong>{extra.comparison}</strong><button type="button" onClick={() => setComparePaths([])}>{extra.clear}</button></div><div className="dark-compare-grid">{comparePaths.map((path) => { const item = files.find((file) => file.path === path); return item ? <div key={item.path}><strong>{item.quantization}</strong><span>{item.name}</span><small>{formatBytes(item.size)} · {item.parameterSize || "—"} {t.parameters}</small></div> : null; })}</div></div>}</section>}
     </main>
