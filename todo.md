@@ -94,3 +94,9 @@
 - [x] Apply clear green, yellow, and red suitability colors across the site.
 - [x] Improve model-card spacing, contrast, and scanning comfort.
 - [x] Verify the refined visual system and redeploy GitHub Pages.
+
+## Clear profile list view
+
+- [ ] Replace profile model cards with a larger, easier-to-scan list.
+- [ ] Keep the View Files action permanently visible on each model row.
+- [ ] Verify the list view and redeploy GitHub Pages.

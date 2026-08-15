@@ -49,3 +49,15 @@ button, input { font:inherit; } button, a { -webkit-tap-highlight-color:transpar
 .dark-recommendation--medium span { background:var(--status-medium); color:#1c1c00; }
 .dark-recommendation--bad { border-color:var(--status-bad); background:rgba(255,0,0,.13); color:#ffd7d7; }
 .dark-recommendation--bad span { background:var(--status-bad); color:#fff; }
+
+/* Profile list mode: compact information on the left, a permanent primary action on the right. */
+.dark-profile-list { display:flex; flex-direction:column; gap:12px; padding:20px; }
+.dark-profile-card { display:grid; grid-template-columns:minmax(0,1fr) 164px; align-items:center; gap:24px; min-height:148px; padding:18px 20px; border-radius:10px; background:linear-gradient(100deg, rgba(255,255,255,.04), transparent 48%), #1a201c; }
+.dark-profile-card:hover { transform:translateY(-2px); background:linear-gradient(100deg, rgba(255,255,255,.065), transparent 48%), #1c241f; }
+.dark-profile-card > div { min-width:0; }
+.dark-profile-card h3 { max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dark-profile-card .dark-card-badges { margin-bottom:10px; }
+.dark-profile-card .dark-card-recommendation { min-height:auto; margin-top:8px; }
+.dark-profile-card > .dark-open-button { display:inline-flex; width:164px; min-height:46px; align-items:center; justify-content:center; gap:8px; border:1px solid #b8ef64; background:#b8ef64; color:#101510; font-size:12px; font-weight:800; box-shadow:0 5px 14px rgba(184,239,100,.14); }
+.dark-profile-card > .dark-open-button:hover { background:#d2ff89; border-color:#d2ff89; }
+@media (max-width:700px) { .dark-profile-list { padding:15px; gap:11px; }.dark-profile-card { grid-template-columns:1fr; gap:15px; min-height:0; padding:16px; }.dark-profile-card > .dark-open-button { width:100%; } }
