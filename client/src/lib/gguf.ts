@@ -12,6 +12,7 @@ export type GgufFile = {
   name: string;
   size: number;
   quantization: string;
+  parameterSize: string;
   downloadUrl: string;
 };
 
@@ -25,7 +26,13 @@ export function isGguf(path: string) {
   return path.toLowerCase().endsWith(".gguf");
 }
 
-export function parseGgufFiles(files: RepositoryFile[], buildUrl: (path: string) => string): GgufFile[] {
+export function detectParameterSize(...sources: string[]) {
+  const combined = sources.join(" ");
+  const match = combined.match(/(?:^|[-_.\s])([0-9]+(?:\.[0-9]+)?)([BMT])(?=$|[-_.\s])/i);
+  return match ? `${match[1]}${match[2].toUpperCase()}` : "";
+}
+
+export function parseGgufFiles(files: RepositoryFile[], buildUrl: (path: string) => string, context = ""): GgufFile[] {
   return files
     .filter((file) => file.type !== "directory" && typeof file.path === "string" && isGguf(file.path))
     .map((file) => {
@@ -36,6 +43,7 @@ export function parseGgufFiles(files: RepositoryFile[], buildUrl: (path: string)
         name,
         size: file.lfs?.size ?? file.size ?? 0,
         quantization: detectQuantization(name),
+        parameterSize: detectParameterSize(name, context),
         downloadUrl: buildUrl(path),
       };
     });
