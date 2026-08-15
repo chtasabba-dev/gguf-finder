@@ -66,3 +66,9 @@
 - [x] Add safe copy buttons for direct file URLs and terminal download commands.
 - [x] Add local browser favorites without accounts or a backend.
 - [x] Verify the complete feature set and redeploy GitHub Pages.
+
+## Contact and signature cleanup
+
+- [x] Replace the Privacy Policy email placeholder with chtasaba@gmail.com.
+- [x] Audit and remove any creator or platform signature from public-facing copy.
+- [x] Verify the contact information and redeploy GitHub Pages.
