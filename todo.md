@@ -109,6 +109,6 @@
 
 ## Plain profile list
 
-- [ ] Remove the remaining card background, shadow, and rounded treatment from profile results.
-- [ ] Present every profile model as a simple separated list row with a View Files action.
-- [ ] Verify the plain list and redeploy GitHub Pages.
+- [x] Remove the remaining card background, shadow, and rounded treatment from profile results.
+- [x] Present every profile model as a simple separated list row with a View Files action.
+- [x] Verify the plain list and redeploy GitHub Pages.
