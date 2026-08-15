@@ -35,6 +35,6 @@
 
 ## Profile card grid
 
-- [ ] Replace the profile repository list with square-style cards on desktop.
-- [ ] Keep cards responsive as a single-column stack on small screens.
-- [ ] Verify the card grid and redeploy GitHub Pages.
+- [x] Replace the profile repository list with square-style cards on desktop.
+- [x] Keep cards responsive as a single-column stack on small screens.
+- [x] Verify the card grid and redeploy GitHub Pages.
