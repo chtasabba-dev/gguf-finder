@@ -62,6 +62,24 @@ export function formatNumber(value?: number) {
   return new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(value);
 }
 
+export function getPcProfile() {
+  const browserNavigator = typeof navigator !== "undefined" ? (navigator as Navigator & { deviceMemory?: number }) : null;
+  const deviceMemory = typeof browserNavigator?.deviceMemory === "number" ? browserNavigator.deviceMemory : 4;
+  const cores = typeof navigator !== "undefined" && typeof navigator.hardwareConcurrency === "number" ? navigator.hardwareConcurrency : 2;
+  return { ramGb: deviceMemory, cores };
+}
+
+export function recommendForPc(parameterSize: string, ramGb: number) {
+  const value = Number.parseFloat(parameterSize);
+  const unit = parameterSize.slice(-1).toUpperCase();
+  const billions = unit === "T" ? value * 1000 : value;
+  if (!Number.isFinite(billions)) return "اختار موديل صغير وبدا بـ Q4_K_M";
+  if (ramGb <= 4) return billions <= 3 ? "مناسب غالباً: 2B–3B مع Q4_K_M" : "ثقيل على هاد الـPC؛ جرّب 2B–3B";
+  if (ramGb <= 8) return billions <= 7 ? "مناسب غالباً: Q4_K_M أو Q4_K_S" : "ممكن يكون ثقيل؛ جرّب موديل أصغر";
+  if (ramGb <= 16) return billions <= 13 ? "مناسب غالباً: Q4_K_M أو Q5_K_M" : "اختار Q4_K_M باش تبقى الذاكرة مرتاحة";
+  return billions <= 34 ? "مناسب غالباً: Q5_K_M أو Q6_K" : "اختار quantization خفيفة وجرب بالتدريج";
+}
+
 export function recommendationForRam(ram: string) {
   const map: Record<string, string[]> = {
     "4": ["Q3_K_S", "Q3_K_M", "Q2_K"],

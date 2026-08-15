@@ -5,7 +5,7 @@ import { ArrowDownToLine, ExternalLink, FileCode2, Loader2, Search, X } from "lu
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { buildFileUrl, buildRepoUrl, findRepository, getFriendlyError, validateRepoId, type RepositoryResult } from "@/lib/huggingface";
-import { detectParameterSize, formatBytes, parseGgufFiles, type GgufFile } from "@/lib/gguf";
+import { detectParameterSize, formatBytes, getPcProfile, parseGgufFiles, recommendForPc, type GgufFile } from "@/lib/gguf";
 
 const DEFAULT_REPO = "bartowski/Qwen2.5-Coder-7B-Instruct-GGUF";
 
@@ -17,6 +17,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [repository, setRepository] = useState<RepositoryResult | null>(null);
   const [files, setFiles] = useState<GgufFile[]>([]);
+  const [pcProfile] = useState(getPcProfile);
 
   const search = async (event?: FormEvent) => {
     event?.preventDefault();
@@ -50,7 +51,7 @@ export default function Home() {
         {state === "idle" && <div className="dark-empty"><FileCode2 size={30} /><p>مازال ما قلبتي على حتى مستودع.</p></div>}
         {state === "loading" && <div className="dark-message"><Loader2 size={28} className="spin" /><p>كنقرا ملفات المستودع...</p></div>}
         {state === "error" && <div className="dark-message dark-error"><X size={28} /><p>{error}</p><button onClick={() => void search()}>عاود المحاولة</button></div>}
-        {state === "success" && repository && <section className="dark-results"><div className="dark-result-head"><div><p className="dark-eyebrow">المستودع</p><h2>{repository.metadata.id.split("/").slice(1).join("/")}</h2><p>{files.length} ملف GGUF{detectParameterSize(repository.metadata.id) ? ` · ${detectParameterSize(repository.metadata.id)} بارامتر` : ""}</p></div><a href={buildRepoUrl(repository.repoId)} target="_blank" rel="noreferrer" className="dark-repo-link">فتح المستودع <ExternalLink size={14} /></a></div>{files.length === 0 ? <div className="dark-message"><FileCode2 size={28} /><p>ما كاين حتى ملف GGUF فهاد المستودع.</p></div> : <div className="dark-file-list">{files.map((file) => <article className="dark-file" key={file.path}><div className="dark-file-meta"><strong>{file.quantization}</strong><span title={file.name}>{file.name}</span><small>{file.parameterSize ? `${file.parameterSize} بارامتر · ` : ""}{formatBytes(file.size)}</small></div><a className="dark-download" href={file.downloadUrl} download={file.name} target="_blank" rel="noreferrer"><ArrowDownToLine size={16} /> تحميل</a></article>)}</div>}</section>}
+        {state === "success" && repository && <section className="dark-results"><div className="dark-result-head"><div><p className="dark-eyebrow">المستودع</p><h2>{repository.metadata.id.split("/").slice(1).join("/")}</h2><p>{files.length} ملف GGUF{detectParameterSize(repository.metadata.id) ? ` · ${detectParameterSize(repository.metadata.id)} بارامتر` : ""}</p><p className="dark-recommendation">اقتراح للـPC ديالك (RAM تقريباً {pcProfile.ramGb}GB): {recommendForPc(detectParameterSize(repository.metadata.id), pcProfile.ramGb)}</p></div><a href={buildRepoUrl(repository.repoId)} target="_blank" rel="noreferrer" className="dark-repo-link">فتح المستودع <ExternalLink size={14} /></a></div>{files.length === 0 ? <div className="dark-message"><FileCode2 size={28} /><p>ما كاين حتى ملف GGUF فهاد المستودع.</p></div> : <div className="dark-file-list">{files.map((file) => <article className="dark-file" key={file.path}><div className="dark-file-meta"><strong>{file.quantization}</strong><span title={file.name}>{file.name}</span><small>{file.parameterSize ? `${file.parameterSize} بارامتر · ` : ""}{formatBytes(file.size)}</small></div><a className="dark-download" href={file.downloadUrl} download={file.name} target="_blank" rel="noreferrer"><ArrowDownToLine size={16} /> تحميل</a></article>)}</div>}</section>}
       </main>
       <footer className="dark-footer">GGUF Finder · خدام بلا API key للمستودعات العامة</footer>
     </div>

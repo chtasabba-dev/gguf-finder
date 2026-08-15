@@ -9,3 +9,6 @@
 - [x] Detect model parameter sizes such as 2B, 20B, and 20T from repository/file names.
 - [x] Display the detected parameter size simply in the Arabic result header and file rows where available.
 - [x] Verify parameter-size parsing and save a new checkpoint.
+- [x] Inspect the current PC memory and define a conservative recommendation rule.
+- [x] Add a simple “مناسب للـPC ديالك” recommendation using available RAM and model size.
+- [x] Verify the recommendation and save a new checkpoint.
