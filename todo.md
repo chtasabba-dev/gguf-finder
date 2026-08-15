@@ -15,7 +15,7 @@
 
 ## GitHub publishing
 
-- [ ] Audit tracked files for secrets and personal data.
-- [ ] Prepare GitHub Pages-compatible deployment configuration.
-- [ ] Create the public `gguf-finder` repository and push the project.
-- [ ] Configure GitHub Pages and verify the public URL.
+- [x] Audit tracked files for secrets and personal data.
+- [x] Prepare GitHub Pages-compatible deployment configuration.
+- [x] Create the public `gguf-finder` repository and push the project.
+- [ ] Configure GitHub Pages and verify the public URL. (Manual Settings → Pages step remains because the GitHub token cannot create the Pages site.)
