@@ -103,6 +103,6 @@
 
 ## Compact profile rows
 
-- [ ] Reduce profile-result row height and horizontal visual weight.
-- [ ] Keep model details and View Files action readable in a compact row.
-- [ ] Verify the compact list and redeploy GitHub Pages.
+- [x] Reduce profile-result row height and horizontal visual weight.
+- [x] Keep model details and View Files action readable in a compact row.
+- [x] Verify the compact list and redeploy GitHub Pages.
