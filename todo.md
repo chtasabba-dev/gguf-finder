@@ -81,3 +81,10 @@
 - [x] Add clear Hugging Face task filters for coder, text, TTS, vision, chat, and other relevant model types.
 - [x] Restore the user's privacy email and remove any creator signature if needed after rollback.
 - [x] Verify all enhancements and redeploy GitHub Pages.
+
+## Model card recommendation presentation
+
+- [x] Show the detected genre directly on every profile model card.
+- [x] Show a green, yellow, or red PC suitability badge directly on every profile model card.
+- [x] Remove the redundant manual model-type selector from profile results.
+- [ ] Verify the updated cards and redeploy GitHub Pages.
