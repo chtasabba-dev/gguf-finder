@@ -41,7 +41,7 @@
 
 ## Privacy Policy and ads readiness
 
-- [ ] Review the app's actual data flows and document only what it does today.
-- [ ] Add an Arabic Privacy Policy page with placeholders for owner/contact/date.
-- [ ] Link the policy from the footer and verify its route.
-- [ ] Redeploy GitHub Pages and confirm the policy URL.
+- [x] Review the app's actual data flows and document only what it does today.
+- [x] Add an Arabic Privacy Policy page with placeholders for owner/contact/date.
+- [x] Link the policy from the footer and verify its route.
+- [x] Redeploy GitHub Pages and confirm the policy URL.
