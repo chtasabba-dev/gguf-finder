@@ -58,3 +58,11 @@
 - [x] Apply RTL only for Arabic and preserve the dark visual system in all languages.
 - [x] Add a return button from repository files to the prior profile results.
 - [x] Verify language switching and return navigation, then redeploy GitHub Pages.
+
+## Lightweight GGUF productivity features
+
+- [ ] Add a PC-suitability filter for good, conditional, and all model results.
+- [ ] Add sorting by recommendation, model parameters, file size, and quantization.
+- [ ] Add safe copy buttons for direct file URLs and terminal download commands.
+- [ ] Add local browser favorites without accounts or a backend.
+- [ ] Verify the complete feature set and redeploy GitHub Pages.
