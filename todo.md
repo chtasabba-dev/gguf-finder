@@ -28,7 +28,7 @@
 
 ## Flexible Hugging Face input
 
-- [ ] Accept repository URLs, `owner/repository`, and owner/profile names.
-- [ ] For a profile name, list repositories and identify those with GGUF files.
-- [ ] Keep the UI simple: show repositories first, then GGUF files after selection.
-- [ ] Verify both input modes and redeploy GitHub Pages.
+- [x] Accept repository URLs, `owner/repository`, and owner/profile names.
+- [x] For a profile name, list repositories and identify those with GGUF files.
+- [x] Keep the UI simple: show repositories first, then GGUF files after selection.
+- [x] Verify both input modes and redeploy GitHub Pages.
