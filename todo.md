@@ -72,3 +72,12 @@
 - [x] Replace the Privacy Policy email placeholder with chtasaba@gmail.com.
 - [x] Audit and remove any creator or platform signature from public-facing copy.
 - [x] Verify the contact information and redeploy GitHub Pages.
+
+## Model discovery enhancements
+
+- [ ] Add manual RAM and GPU profile controls.
+- [ ] Add a shareable link containing repository and language state.
+- [ ] Add comparison for two selected quantizations.
+- [ ] Add clear Hugging Face task filters for coder, text, TTS, vision, chat, and other relevant model types.
+- [ ] Restore the user's privacy email and remove any creator signature if needed after rollback.
+- [ ] Verify all enhancements and redeploy GitHub Pages.

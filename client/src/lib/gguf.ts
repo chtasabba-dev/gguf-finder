@@ -169,3 +169,13 @@ export function recommendationForRam(ram: string) {
   };
   return map[ram] ?? map["8"];
 }
+
+export type ManualPcProfile = { ramGb: number; gpu: string };
+
+export function getDefaultManualPcProfile(): ManualPcProfile {
+  return { ramGb: getPcProfile().ramGb, gpu: "" };
+}
+
+export function getPcProfileStorageKey() {
+  return "gguf-finder:manual-pc-profile";
+}
