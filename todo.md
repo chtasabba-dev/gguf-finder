@@ -18,4 +18,10 @@
 - [x] Audit tracked files for secrets and personal data.
 - [x] Prepare GitHub Pages-compatible deployment configuration.
 - [x] Create the public `gguf-finder` repository and push the project.
-- [ ] Configure GitHub Pages and verify the public URL. (Manual Settings → Pages step remains because the GitHub token cannot create the Pages site.)
+- [x] Configure GitHub Pages and verify the public URL.
+
+## Pages link follow-up
+
+- [x] Inspect the latest workflow run and repository Pages status.
+- [x] Resolve any remaining workflow or Pages permission issue.
+- [x] Verify the deployed URL or give the exact final manual step.
