@@ -75,9 +75,9 @@
 
 ## Model discovery enhancements
 
-- [ ] Add manual RAM and GPU profile controls.
-- [ ] Add a shareable link containing repository and language state.
-- [ ] Add comparison for two selected quantizations.
-- [ ] Add clear Hugging Face task filters for coder, text, TTS, vision, chat, and other relevant model types.
-- [ ] Restore the user's privacy email and remove any creator signature if needed after rollback.
-- [ ] Verify all enhancements and redeploy GitHub Pages.
+- [x] Add manual RAM and GPU profile controls.
+- [x] Add a shareable link containing repository and language state.
+- [x] Add comparison for two selected quantizations.
+- [x] Add clear Hugging Face task filters for coder, text, TTS, vision, chat, and other relevant model types.
+- [x] Restore the user's privacy email and remove any creator signature if needed after rollback.
+- [x] Verify all enhancements and redeploy GitHub Pages.
