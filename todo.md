@@ -87,4 +87,4 @@
 - [x] Show the detected genre directly on every profile model card.
 - [x] Show a green, yellow, or red PC suitability badge directly on every profile model card.
 - [x] Remove the redundant manual model-type selector from profile results.
-- [ ] Verify the updated cards and redeploy GitHub Pages.
+- [x] Verify the updated cards and redeploy GitHub Pages.
