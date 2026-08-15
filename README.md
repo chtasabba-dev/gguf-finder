@@ -81,3 +81,9 @@ The live public repository `bartowski/Qwen2.5-Coder-7B-Instruct-GGUF` was search
 - [Download files from the Hub](https://huggingface.co/docs/huggingface_hub/en/guides/download)
 - [Hugging Face file download reference](https://huggingface.co/docs/huggingface_hub/en/package_reference/file_download)
 - [Chrome Manifest V3](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
+
+## GitHub Pages
+
+The repository includes `.github/workflows/deploy-pages.yml` and is configured to build the app under the `/gguf-finder/` repository path. After the first push, open **Settings → Pages** in the GitHub repository and choose **GitHub Actions** as the source. The workflow will then publish the site at `https://chtasabba-dev.github.io/gguf-finder/` after a successful run.
+
+The project does not depend on Manus-hosted images for this deployment path; the favicon is stored locally and the current dark Arabic interface uses CSS-only visual styling.
