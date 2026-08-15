@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "GGUF Finder",
+  "version": "0.1.0",
+  "description": "Find and download GGUF files from public Hugging Face repositories.",
+  "action": {
+    "default_title": "GGUF Finder",
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "https://huggingface.co/*"
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
