@@ -61,8 +61,8 @@
 
 ## Lightweight GGUF productivity features
 
-- [ ] Add a PC-suitability filter for good, conditional, and all model results.
-- [ ] Add sorting by recommendation, model parameters, file size, and quantization.
-- [ ] Add safe copy buttons for direct file URLs and terminal download commands.
-- [ ] Add local browser favorites without accounts or a backend.
-- [ ] Verify the complete feature set and redeploy GitHub Pages.
+- [x] Add a PC-suitability filter for good, conditional, and all model results.
+- [x] Add sorting by recommendation, model parameters, file size, and quantization.
+- [x] Add safe copy buttons for direct file URLs and terminal download commands.
+- [x] Add local browser favorites without accounts or a backend.
+- [x] Verify the complete feature set and redeploy GitHub Pages.
