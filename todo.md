@@ -12,3 +12,10 @@
 - [x] Inspect the current PC memory and define a conservative recommendation rule.
 - [x] Add a simple “مناسب للـPC ديالك” recommendation using available RAM and model size.
 - [x] Verify the recommendation and save a new checkpoint.
+
+## GitHub publishing
+
+- [ ] Audit tracked files for secrets and personal data.
+- [ ] Prepare GitHub Pages-compatible deployment configuration.
+- [ ] Create the public `gguf-finder` repository and push the project.
+- [ ] Configure GitHub Pages and verify the public URL.
