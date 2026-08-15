@@ -51,3 +51,10 @@
 - [x] Define suitable, conditional, and unsuitable model thresholds.
 - [x] Show the PC recommendation in green, yellow, or red with a readable label.
 - [x] Verify the visual states and redeploy GitHub Pages.
+
+## Languages and return navigation
+
+- [ ] Add AR, FR, and EN interface language controls.
+- [ ] Apply RTL only for Arabic and preserve the dark visual system in all languages.
+- [ ] Add a return button from repository files to the prior profile results.
+- [ ] Verify language switching and return navigation, then redeploy GitHub Pages.
