@@ -1,25 +1,12 @@
-<!-- Paper Console / extension popup: compact Manifest V3 shell for the shared GGUF Finder flow. -->
+<!-- Dark Arabic Console / extension popup: minimal Manifest V3 shell. -->
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GGUF Finder</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+<html lang="ar" dir="rtl">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>GGUF Finder</title><link rel="stylesheet" href="styles.css" /></head>
 <body>
   <main class="popup-shell">
-    <header class="popup-header"><div class="mark">↓</div><div><strong>GGUF</strong> FINDER</div><span>MV3</span></header>
-    <p class="eyebrow">REPOSITORY LOOKUP</p>
-    <h1>Find the right<br /><em>GGUF file.</em></h1>
-    <form id="search-form">
-      <label for="repo">Repository ID</label>
-      <div class="input-wrap"><input id="repo" placeholder="owner/repository" autocomplete="off" /><button id="clear" type="button" aria-label="Clear">×</button></div>
-      <button class="find" type="submit">Find GGUF <span>↗</span></button>
-    </form>
-    <div id="status" class="status">Ready for a repository</div>
-    <section id="results" aria-live="polite"><div class="empty"><span>⌁</span><p>Enter a public Hugging Face repository to see its GGUF files.</p></div></section>
-  </main>
-  <script type="module" src="popup.js"></script>
-</body>
-</html>
+    <header class="popup-header"><div class="mark">↓</div><div><strong>GGUF</strong> Finder</div></header>
+    <p class="eyebrow">البحث في المستودعات</p><h1>لقا ملفات<br /><em>GGUF</em></h1>
+    <form id="search-form"><label for="repo">رابط المستودع</label><div class="input-wrap"><input id="repo" placeholder="owner/repository" autocomplete="off" dir="ltr" /><button id="clear" type="button" aria-label="مسح">×</button></div><button class="find" type="submit">قلب على الملفات <span>↗</span></button></form>
+    <div id="status" class="status">جاهز للبحث</div><section id="results" aria-live="polite"><div class="empty"><span>⌁</span><p>دخل مستودع عام من Hugging Face باش تشوف ملفات GGUF.</p></div></section>
+  </main><script type="module" src="popup.js"></script>
+</body></html>
