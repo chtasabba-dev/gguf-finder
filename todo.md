@@ -69,6 +69,6 @@
 
 ## Contact and signature cleanup
 
-- [ ] Replace the Privacy Policy email placeholder with chtasaba@gmail.com.
-- [ ] Audit and remove any creator or platform signature from public-facing copy.
-- [ ] Verify the contact information and redeploy GitHub Pages.
+- [x] Replace the Privacy Policy email placeholder with chtasaba@gmail.com.
+- [x] Audit and remove any creator or platform signature from public-facing copy.
+- [x] Verify the contact information and redeploy GitHub Pages.
