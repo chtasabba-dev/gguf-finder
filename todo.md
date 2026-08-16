@@ -129,6 +129,6 @@
 
 ## Neutral initial search
 
-- [ ] Start the repository search field empty instead of prefilled with a model repository.
-- [ ] Show neutral Google, NVIDIA, DeepSeek, and Qwen example hints.
-- [ ] Push the change and verify GitHub Actions publishes it to GitHub Pages.
+- [x] Start the repository search field empty instead of prefilled with a model repository.
+- [x] Show neutral Google, NVIDIA, DeepSeek, and Qwen example hints.
+- [x] Push the change and verify GitHub Actions publishes it to GitHub Pages.
