@@ -1,7 +1,7 @@
 /* Dark Arabic Console / Home page: multilingual GGUF search, local favorites, filters, sort, and copy actions. */
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { ArrowDownToLine, ArrowRight, Copy, ExternalLink, FileCode2, FolderSearch, GitCompareArrows, Heart, Loader2, Search, Settings2, Share2, Terminal, X } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ChevronDown, Copy, ExternalLink, FileCode2, FolderSearch, GitCompareArrows, Heart, Loader2, Search, Settings2, Share2, Terminal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -16,6 +16,7 @@ type State = "idle" | "loading" | "success" | "error";
 type View = "profile" | "repository";
 type FilterMode = "all" | "good" | "medium" | "bad";
 type SortMode = "size-desc" | "size-asc" | "parameters" | "quantization";
+type ProfileSortMode = "downloads" | "name";
 type Favorite = GgufFile & { repoId: string };
 
 const copy = {
@@ -56,17 +57,35 @@ export default function Home() {
   const [taskFilter, setTaskFilter] = useState<ModelTask>("all");
   const [comparePaths, setComparePaths] = useState<string[]>([]);
   const [shareCopied, setShareCopied] = useState(false);
+  const [profileSearch, setProfileSearch] = useState("");
+  const [profileSortMode, setProfileSortMode] = useState<ProfileSortMode>("downloads");
+  const [expandedProfileId, setExpandedProfileId] = useState<string | null>(null);
   const t = copy[language];
   const extra = extraCopy[language];
   const taskLabels = modelTaskLabels[language];
   const filterLabels: Record<FilterMode, string> = { all: t.all, good: t.suitable, medium: t.conditional, bad: language === "ar" ? "ثقيل" : language === "fr" ? "Lourd" : "Heavy" };
+  const profileListCopy = language === "ar"
+    ? { search: "قلب بالاسم وسط الموديلات", sort: "ترتيب", downloads: "الأكثر تحميلاً", name: "الاسم", details: "تفاصيل", hide: "سد التفاصيل", model: "الموديل", parameters: "بارامتر", fit: "اقتراح الـPC" }
+    : language === "fr"
+      ? { search: "Rechercher un modèle", sort: "Trier", downloads: "Plus téléchargés", name: "Nom", details: "Détails", hide: "Masquer", model: "Modèle", parameters: "Paramètres", fit: "PC" }
+      : { search: "Search models by name", sort: "Sort", downloads: "Most downloaded", name: "Name", details: "Details", hide: "Hide details", model: "Model", parameters: "Parameters", fit: "PC fit" };
   const suitability = repository ? getPcSuitability(detectParameterSize(repository.metadata.id), manualPcProfile.ramGb, language) : null;
   const repositoryTask = repository ? detectModelTask(repository.metadata.pipeline_tag, repository.metadata.tags, repository.metadata.id, Object.keys(repository.metadata.cardData ?? {})) : "other";
 
   useEffect(() => { document.documentElement.lang = language; document.documentElement.dir = t.dir; }, [language, t.dir]);
   const changeLanguage = (next: SiteLanguage) => { setLanguage(next); savePreferredLanguage(next); };
 
-  const visibleProfileRepos = useMemo(() => profileRepos.filter((repo) => (filterMode === "all" || getPcSuitability(detectParameterSize(repo.id), manualPcProfile.ramGb, language).status === filterMode) && (taskFilter === "all" || detectModelTask(repo.pipeline_tag, repo.tags, repo.id) === taskFilter)), [profileRepos, filterMode, manualPcProfile.ramGb, language, taskFilter]);
+  const visibleProfileRepos = useMemo(() => {
+    const normalizedSearch = profileSearch.trim().toLowerCase();
+    const filtered = profileRepos.filter((repo) => (
+      (filterMode === "all" || getPcSuitability(detectParameterSize(repo.id), manualPcProfile.ramGb, language).status === filterMode)
+      && (taskFilter === "all" || detectModelTask(repo.pipeline_tag, repo.tags, repo.id) === taskFilter)
+      && (!normalizedSearch || repo.id.toLowerCase().includes(normalizedSearch))
+    ));
+    return filtered.sort((a, b) => profileSortMode === "downloads"
+      ? (b.downloads ?? 0) - (a.downloads ?? 0)
+      : a.id.localeCompare(b.id));
+  }, [profileRepos, filterMode, manualPcProfile.ramGb, language, taskFilter, profileSearch, profileSortMode]);
   const visibleFiles = useMemo(() => {
     const filtered = (!suitability || filterMode === "all" || suitability.status === filterMode) && (taskFilter === "all" || repositoryTask === taskFilter) ? [...files] : [];
     return filtered.sort((a, b) => {
@@ -88,7 +107,7 @@ export default function Home() {
     const profile = validateOwner(input);
     if (!profile) { setError(t.invalid); setState("error"); return; }
     setState("loading"); setError(""); setCanReturnToProfile(false);
-    try { const repos = await findProfileRepositories(profile); setOwner(profile); setProfileRepos(repos); setRepository(null); setFiles([]); setView("profile"); setState("success"); }
+    try { const repos = await findProfileRepositories(profile); setOwner(profile); setProfileRepos(repos); setProfileSearch(""); setProfileSortMode("downloads"); setExpandedProfileId(null); setRepository(null); setFiles([]); setView("profile"); setState("success"); }
     catch (caught) { setError(getFriendlyError(caught)); setState("error"); }
   };
   const backToProfile = () => { setRepository(null); setFiles([]); setView("profile"); setState("success"); setCanReturnToProfile(false); };
@@ -131,6 +150,8 @@ export default function Home() {
                 <button type="button" key={item} className={`${filterMode === item ? "is-active " : ""}dark-filter-${item}`} onClick={() => setFilterMode(item)}>{filterLabels[item]}</button>
               ))}
             </div>
+            <label className="dark-profile-search" aria-label={profileListCopy.search}><Search size={15} /><input value={profileSearch} onChange={(event) => setProfileSearch(event.target.value)} placeholder={profileListCopy.search} dir="ltr" /></label>
+            <label className="dark-sort dark-profile-sort"><span>{profileListCopy.sort}</span><select value={profileSortMode} onChange={(event) => setProfileSortMode(event.target.value as ProfileSortMode)}><option value="downloads">{profileListCopy.downloads}</option><option value="name">{profileListCopy.name}</option></select></label>
           </div>
           {visibleProfileRepos.length === 0 ? (
             <div className="dark-message"><FolderSearch size={28} /><p>{filterMode === "all" ? t.noProfile : t.noFilterFiles}</p></div>
@@ -146,7 +167,11 @@ export default function Home() {
                       <h3>{repo.id.split("/").slice(1).join("/")}</h3>
                       <p>{repo.downloads ? `${formatDownloads(repo.downloads)} ${t.downloads}` : ""}{repo.likes ? ` · ${formatDownloads(repo.likes)} ${t.likes}` : ""}</p>
                     </div>
-                    <button className="dark-open-button dark-profile-view-button" onClick={() => void loadRepository(repo.id, true)}>{t.viewFiles} <ArrowDownToLine size={15} /></button>
+                    <div className="dark-profile-row-actions">
+                      <button className="dark-profile-details-toggle" type="button" aria-expanded={expandedProfileId === repo.id} onClick={() => setExpandedProfileId((current) => current === repo.id ? null : repo.id)}>{expandedProfileId === repo.id ? profileListCopy.hide : profileListCopy.details} <ChevronDown size={14} className={expandedProfileId === repo.id ? "is-open" : ""} /></button>
+                      <button className="dark-open-button dark-profile-view-button" onClick={() => void loadRepository(repo.id, true)}>{t.viewFiles} <ArrowDownToLine size={15} /></button>
+                    </div>
+                    {expandedProfileId === repo.id && <div className="dark-profile-inline-details"><span><b>{profileListCopy.model}</b> {repo.id}</span><span><b>{profileListCopy.parameters}</b> {detectParameterSize(repo.id) || "—"}</span><span><b>{profileListCopy.fit}</b> {rowSuitability.message}</span></div>}
                   </li>
                 );
               })}

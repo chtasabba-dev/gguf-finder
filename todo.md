@@ -119,3 +119,10 @@
 - [x] Add an explicit red suitability filter alongside green, yellow, and all.
 - [x] Style the recommendation filters with their corresponding status colors.
 - [x] Verify list filtering and redeploy GitHub Pages.
+
+## Profile list controls
+
+- [ ] Add a search field for model names within owner results.
+- [ ] Add download-count ordering for owner results.
+- [ ] Add an inline details toggle to each model row.
+- [ ] Verify all profile-list controls and redeploy GitHub Pages.
