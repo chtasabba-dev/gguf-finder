@@ -132,3 +132,9 @@
 - [x] Start the repository search field empty instead of prefilled with a model repository.
 - [x] Show neutral Google, NVIDIA, DeepSeek, and Qwen example hints.
 - [x] Push the change and verify GitHub Actions publishes it to GitHub Pages.
+
+## Desktop readability
+
+- [ ] Widen the main desktop layout and profile list area.
+- [ ] Increase reading-size typography for controls, labels, results, and actions.
+- [ ] Verify desktop readability and redeploy GitHub Pages.
