@@ -131,7 +131,7 @@ export async function findRepository(repoId: string, options: FetchOptions = {})
   if (cached) return cached;
 
   const encodedRepo = repoId.split("/").map(encodeURIComponent).join("/");
-  const metadataUrl = `${API_ORIGIN}/models/${encodedRepo}?expand[]=cardData&expand[]=siblings`;
+  const metadataUrl = `${API_ORIGIN}/models/${encodedRepo}?expand[]=cardData&expand[]=siblings&expand[]=gated`;
   const treeUrl = `${API_ORIGIN}/models/${encodedRepo}/tree/main?recursive=true&expand=true`;
   const [metadata, files] = await Promise.all([
     requestJson<RepositoryMetadata>(metadataUrl, options),
