@@ -41,6 +41,7 @@ export type ProfileRepository = {
   lastModified?: string;
   tags?: string[];
   pipeline_tag?: string;
+  gated?: boolean | string;
 };
 
 export class HuggingFaceError extends Error {
@@ -122,7 +123,7 @@ export function validateOwner(value: string): string | null {
 export async function findProfileRepositories(owner: string, options: FetchOptions = {}): Promise<ProfileRepository[]> {
   const normalizedOwner = validateOwner(owner);
   if (!normalizedOwner) throw new HuggingFaceError("اسم الـprofile ما صالحش. استعمل owner فقط أو رابط profile ديال Hugging Face.", 400, "not-found");
-  const url = `${API_ORIGIN}/models?author=${encodeURIComponent(normalizedOwner)}&filter=gguf&limit=50&full=false&sort=downloads&direction=-1`;
+  const url = `${API_ORIGIN}/models?author=${encodeURIComponent(normalizedOwner)}&filter=gguf&limit=50&full=true&sort=downloads&direction=-1`;
   return requestJson<ProfileRepository[]>(url, options);
 }
 

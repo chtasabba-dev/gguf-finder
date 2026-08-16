@@ -144,3 +144,9 @@
 - [x] Detect Hugging Face gated or restricted model errors.
 - [x] Show a clear Request Access explanation and official model-page action.
 - [x] Verify the error experience and redeploy GitHub Pages.
+
+## List feedback and restricted badges
+
+- [ ] Show an in-context loading state when opening a model’s file details.
+- [ ] Display a Restricted badge for gated models in profile results.
+- [ ] Verify the new feedback and badge behavior, then redeploy GitHub Pages.
