@@ -141,6 +141,6 @@
 
 ## Restricted model guidance
 
-- [ ] Detect Hugging Face gated or restricted model errors.
-- [ ] Show a clear Request Access explanation and official model-page action.
-- [ ] Verify the error experience and redeploy GitHub Pages.
+- [x] Detect Hugging Face gated or restricted model errors.
+- [x] Show a clear Request Access explanation and official model-page action.
+- [x] Verify the error experience and redeploy GitHub Pages.
