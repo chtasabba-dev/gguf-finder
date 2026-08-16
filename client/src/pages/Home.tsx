@@ -10,7 +10,7 @@ import { getPreferredLanguage, savePreferredLanguage, type SiteLanguage } from "
 import { detectParameterSize, formatBytes, getDefaultManualPcProfile, getPcProfileStorageKey, getPcSuitability, parseGgufFiles, type GgufFile, type ManualPcProfile } from "@/lib/gguf";
 import { detectModelTask, modelTaskLabels, type ModelTask } from "@/lib/modelFilters";
 
-const DEFAULT_REPO = "bartowski/Qwen2.5-Coder-7B-Instruct-GGUF";
+const EXAMPLE_OWNERS = "Google · NVIDIA · DeepSeek · Qwen";
 const FAVORITES_KEY = "gguf-finder:favorites";
 type State = "idle" | "loading" | "success" | "error";
 type View = "profile" | "repository";
@@ -38,7 +38,7 @@ function persistFavorites(next: Favorite[]) { try { localStorage.setItem(FAVORIT
 
 export default function Home() {
   const [language, setLanguage] = useState<SiteLanguage>(getPreferredLanguage);
-  const [repoInput, setRepoInput] = useState(DEFAULT_REPO);
+  const [repoInput, setRepoInput] = useState("");
   const [state, setState] = useState<State>("idle");
   const [view, setView] = useState<View>("repository");
   const [canReturnToProfile, setCanReturnToProfile] = useState(false);
@@ -128,7 +128,7 @@ export default function Home() {
     <header className="dark-header"><a className="dark-brand" href={import.meta.env.BASE_URL} aria-label="GGUF Finder"><span className="dark-logo">↓</span><span><strong>GGUF</strong> Finder</span></a><div className="dark-header-tools"><button className="dark-favorites-toggle" type="button" onClick={() => setShowFavorites((current) => !current)}><Heart size={14} fill={favorites.length ? "currentColor" : "none"} /> {t.favorites} {favorites.length ? `(${favorites.length})` : ""}</button><button className="dark-favorites-toggle" type="button" onClick={() => setShowPcSettings((current) => !current)}><Settings2 size={14} /> {extra.pc}</button><span className="dark-header-note">{t.header}</span><LanguageSwitcher language={language} onChange={changeLanguage} /></div></header>
     <main className="dark-main">
       <section className="dark-intro"><p className="dark-eyebrow">{t.eyebrow}</p><h1>{t.titleA}<br /><span>GGUF</span> {t.titleB}</h1><p>{t.intro}</p></section>
-      <form className="dark-search" onSubmit={search}><label htmlFor="repo-input">{t.label}</label><div className="dark-input-row"><Search size={18} /><Input id="repo-input" value={repoInput} onChange={(event) => setRepoInput(event.target.value)} placeholder={t.placeholder} dir="ltr" /><button type="button" aria-label="Clear" onClick={() => setRepoInput("")}><X size={16} /></button></div><Button className="dark-search-button" type="submit" disabled={state === "loading"}>{state === "loading" ? <><Loader2 size={16} className="spin" /> {t.searching}</> : <><span>{t.search}</span><Search size={16} /></>}</Button><small>{t.example}: {DEFAULT_REPO} · {t.ownerExample}: bartowski</small></form>
+      <form className="dark-search" onSubmit={search}><label htmlFor="repo-input">{t.label}</label><div className="dark-input-row"><Search size={18} /><Input id="repo-input" value={repoInput} onChange={(event) => setRepoInput(event.target.value)} placeholder={t.placeholder} dir="ltr" /><button type="button" aria-label="Clear" onClick={() => setRepoInput("")}><X size={16} /></button></div><Button className="dark-search-button" type="submit" disabled={state === "loading"}>{state === "loading" ? <><Loader2 size={16} className="spin" /> {t.searching}</> : <><span>{t.search}</span><Search size={16} /></>}</Button><small>{t.ownerExample}: {EXAMPLE_OWNERS}</small></form>
       {showPcSettings && <form className="dark-pc-panel" onSubmit={savePcSettings}><div><strong>{extra.pc}</strong><small>{extra.manualNote}</small></div><label>{extra.ram}<select value={manualPcProfile.ramGb} onChange={(event) => setManualPcProfile((current) => ({ ...current, ramGb: Number(event.target.value) }))}><option value={4}>4GB</option><option value={8}>8GB</option><option value={16}>16GB</option><option value={32}>32GB</option><option value={64}>64GB+</option></select></label><label>{extra.gpu}<input value={manualPcProfile.gpu} onChange={(event) => setManualPcProfile((current) => ({ ...current, gpu: event.target.value }))} placeholder={extra.gpuPlaceholder} dir="ltr" /></label><button type="submit" className="dark-open-button">{extra.save}</button></form>}
 
       {showFavorites && <section className="dark-favorites-panel"><div className="dark-favorites-head"><h2>{t.favorites}</h2><button type="button" onClick={() => setShowFavorites(false)} aria-label="Close"><X size={16} /></button></div>{favorites.length === 0 ? <p>{t.noFavorites}</p> : <div>{favorites.map((item) => <article className="dark-favorite-row" key={favoriteKey(item)}><div><strong>{item.name}</strong><small>{item.repoId} · {item.quantization}</small></div><div><button type="button" onClick={() => void copyText(item.downloadUrl)}><Copy size={14} /></button><button type="button" onClick={() => { const next = favorites.filter((favorite) => favoriteKey(favorite) !== favoriteKey(item)); setFavorites(next); persistFavorites(next); }}><X size={14} /></button></div></article>)}</div>}</section>}

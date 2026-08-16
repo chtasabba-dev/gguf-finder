@@ -126,3 +126,9 @@
 - [x] Add download-count ordering for owner results.
 - [x] Add an inline details toggle to each model row.
 - [x] Verify all profile-list controls and redeploy GitHub Pages.
+
+## Neutral initial search
+
+- [ ] Start the repository search field empty instead of prefilled with a model repository.
+- [ ] Show neutral Google, NVIDIA, DeepSeek, and Qwen example hints.
+- [ ] Push the change and verify GitHub Actions publishes it to GitHub Pages.
