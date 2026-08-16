@@ -135,6 +135,6 @@
 
 ## Desktop readability
 
-- [ ] Widen the main desktop layout and profile list area.
-- [ ] Increase reading-size typography for controls, labels, results, and actions.
-- [ ] Verify desktop readability and redeploy GitHub Pages.
+- [x] Widen the main desktop layout and profile list area.
+- [x] Increase reading-size typography for controls, labels, results, and actions.
+- [x] Verify desktop readability and redeploy GitHub Pages.
