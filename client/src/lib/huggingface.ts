@@ -138,6 +138,10 @@ export async function findRepository(repoId: string, options: FetchOptions = {})
     requestJson<RepositoryFile[]>(treeUrl, options),
   ]);
 
+  if (metadata.gated) {
+    throw new HuggingFaceError("This repository requires access approval.", 403, "auth");
+  }
+
   const result = { metadata, files, repoId };
   setCached(repoId, result);
   return result;
