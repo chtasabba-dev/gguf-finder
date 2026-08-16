@@ -138,3 +138,9 @@
 - [x] Widen the main desktop layout and profile list area.
 - [x] Increase reading-size typography for controls, labels, results, and actions.
 - [x] Verify desktop readability and redeploy GitHub Pages.
+
+## Restricted model guidance
+
+- [ ] Detect Hugging Face gated or restricted model errors.
+- [ ] Show a clear Request Access explanation and official model-page action.
+- [ ] Verify the error experience and redeploy GitHub Pages.
